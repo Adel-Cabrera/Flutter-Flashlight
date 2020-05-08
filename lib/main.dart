@@ -49,18 +49,57 @@ class _CameraAppState extends State<CameraApp> {
 
     var cameraPreview = new CameraPreview(cameraController);
 
-    return new GestureDetector(
-        onScaleUpdate: (one) {
-          print(one.scale);
+    return MaterialApp(
+      home: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Builder(
+              builder: (context) => Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: new GestureDetector(
+                  onScaleUpdate: (one) {
+                    print(one.scale);
 
-          scale = one.scale;
-          setState(() {});
-        },
-        child: new Transform.scale(
-            scale: scale,
-            child: new AspectRatio(
-                aspectRatio: cameraController.value.aspectRatio,
-                child: cameraPreview)));
+                    scale = one.scale;
+                    setState(() {});
+                  },
+                  child: new Transform.scale(
+                    scale: scale,
+                    child: new AspectRatio(
+                        aspectRatio: cameraController.value.aspectRatio,
+                        child: cameraPreview),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: () {},
+              child: Icon(
+                Icons.refresh,
+              ),
+            ),
+            FloatingActionButton(
+              onPressed: () {},
+              child: Icon(
+                Icons.remove,
+              ),
+            ),
+            FloatingActionButton(
+              onPressed: () {},
+              child: Icon(
+                Icons.add,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
