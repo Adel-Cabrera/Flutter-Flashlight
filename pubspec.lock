@@ -102,6 +102,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_torch:
+    dependency: "direct main"
+    description:
+      name: flutter_torch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3"
   html:
     dependency: transitive
     description:
@@ -199,7 +206,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.0"
+    version: "4.1.1"
   quiver:
     dependency: transitive
     description:

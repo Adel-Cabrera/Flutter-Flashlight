@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:adv_camera/adv_camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_view/photo_view.dart';
@@ -299,36 +300,37 @@ class _AdvCameraPageState extends State<AdvCameraPage> {
           ),
           (freezedImage == false)
               ? FloatingActionButton(
-                  heroTag: '0',
-                  child: Icon(Icons.lightbulb_outline),
-                  onPressed: () {
-                    cameraController.setFlashType(FlashType.torch);
-                  },
-                )
-              : Container(),
-          SizedBox(
-            height: 10.0,
-          ),
-          (freezedImage == false)
-              ? FloatingActionButton(
                   heroTag: '1',
                   child: setFlash != true
                       ? Icon(Icons.flash_on)
                       : Icon(Icons.flash_off),
                   onPressed: () {
-                    if (setFlash == true) {
+                    try {
+                      if (setFlash != true) {
+                        cameraController.setFlashType(FlashType.torch);
+                        setFlash = !setFlash;
+                      } else {
+                        cameraController.setFlashType(FlashType.off);
+                        setFlash = !setFlash;
+                      }
+                    } on PlatformException {
+                      cameraController.setFlashType(FlashType.torch);
                       setFlash = !setFlash;
-                      cameraController.setFlashType(FlashType.on);
-                    } else {
-                      setFlash = !setFlash;
-                      cameraController.setFlashType(FlashType.off);
                     }
+
+//                    if (setFlash != true) {
+//                      cameraController.setFlashType(FlashType.torch);
+//                      setFlash = !setFlash;
+//                    } else {
+//                      cameraController.setFlashType(FlashType.off);
+//                      setFlash = !setFlash;
+//                    }
 
                     setState(() {});
 
-                    print('***************************************');
-                    print('Flash is $setFlash');
-                    print('***************************************');
+//                    print('***************************************');
+//                    print('Flash is $setFlash');
+//                    print('***************************************');
                   },
                 )
               : Container(),

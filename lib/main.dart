@@ -1,5 +1,7 @@
 import 'package:flashlightapp/src/pages/home_page.dart';
+import 'package:flashlightapp/src/providers/change_slider_value.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //List<CameraDescription> cameras;
 
@@ -13,7 +15,10 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MyApp(),
+    ListenableProvider(
+      create: (context) => ChangeSliderValue(),
+      child: MyApp(),
+    ),
   );
 }
 
